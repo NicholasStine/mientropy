@@ -24,3 +24,79 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+div.grid-wrapper {
+  background: #808080;
+  padding-right: 3px;
+  padding-bottom: 3px;
+}
+
+td.tile {
+  height: 40px;
+  width: 40px;
+}
+
+td[class="tile 1"] { 
+  background: url('/tile-1.png');
+  background-size: contain;
+}
+
+td[class="tile 2"] {
+  background: url('/tile-2.png');
+  background-size: contain;
+}
+
+td[class="tile 3"] {
+  background: url('/tile-3.png');
+  background-size: contain;
+}
+
+td[class="tile 4"] {
+  background: url('/tile-4.png');
+  background-size: contain;
+}
+
+td[class="tile 5"] {
+  background: url('/tile-5.png');
+  background-size: contain;
+}
+
+td[class="tile 6"] {
+  background: url('/tile-6.png');
+  background-size: contain;
+}
+
+td[class="tile 7"] {
+  background: url('/tile-7.png');
+  background-size: contain;
+}
+
+td[class="tile blank"] {
+  background: url('/tile-blank.png');
+  background-size: contain;
+}
+
+td[class="tile bomb"] {
+  background: url('/tile-bomb.png');
+  background-size: contain;
+}
+
+td[class="tile bomb-red"] {
+  background: url('/tile-bomb-red.png');
+  background-size: contain;
+}
+
+td[class="tile flag"] {
+  background: url('/tile-flag.png');
+  background-size: contain;
+}
+
+td[class="tile flag-red"] {
+  background: url('/tile-flag-red.png');
+  background-size: contain;
+}
+
+td[class="tile unknown"] {
+  background: url('/tile-unknown.png');
+  background-size: contain;
+}
