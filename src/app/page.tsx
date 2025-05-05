@@ -75,14 +75,14 @@ export default function Home() {
     }
   }
 
-  function initializeGame() {
+  function initializeGrid() {
     // load and refresh the minesweeper grid
     let grid = document.querySelectorAll('.minesweeper-grid')[0]
     let new_grid = document.createElement('tbody')
     new_grid.className = 'minesweeper-grid'
     grid.replaceWith(new_grid)
     grid = document.querySelectorAll('.minesweeper-grid')[0]
-
+    
     // Loop through the rows and columns to add each tile
     for (let i = 0; i < ROWS; i++) {
       const row = document.createElement('tr')
@@ -104,13 +104,18 @@ export default function Home() {
       }
       grid.appendChild(row)
     }
+    return grid
+  }
 
+  function initializeBombs() {
     const bombs = indicies.sort((a, b) => 0.5 - Math.random()).slice(0,MINE_COUNT)
     for (const [i, j] of bombs) {
       // @ts-ignore
-      const td = tiles[COLUMNS * i + j].isBomb = true
+      tiles[COLUMNS * i + j].isBomb = true
     }
+  }
 
+  function initializeNearbyCounts() {
     for (const tile of tiles) {
       // @ts-ignore
       const { isBomb, tileI: i, tileJ: j } = tile
@@ -118,6 +123,12 @@ export default function Home() {
       // @ts-ignore
       tile.nearby = nearby
     }
+  }
+
+  function initializeGame() {
+    initializeGrid()
+    initializeBombs()
+    initializeNearbyCounts()
   }
 
   force_update += 1

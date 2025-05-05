@@ -1,18 +1,6 @@
 # Mientropy
 A minesweeper clone where I can explore using entropy and probability to solve minesweeper!
 
-## Goals
-Most of what I'm doing has been inspired by [this online clone of minesweeper](https://minesweeper.online/), and [this paper on using entropy to calculate the likelihood of mine locations, written by Mike Sheppard](https://minesweepergame.com/math/a-simple-minesweeper-algorithm-2023.pdf). 
-
-The ideal final result would be a fully functional minesweeper game with easy, intermediate, hard, and an auto solver that shows probabilities as it makes it's automated click decisions. The math outlined in the paper absolutely melts my mind. I never took statistics in high-school, so this type of work (while enticing) always comes with a steep learning curve. That said, I hope mostly to understand the math well enough to give an *elevator pitch* on how it works, and understand the algorithm well enough to implement it.
-
-This is a **no AI allowed project**. I'm actively learning and regularly advocate for the use of AI as a developer, but with projects like these, it's fun to prompt Grok and ChatGPT **only** for written explainations, **without** providing code. I don't just want to lanch a minesweeper app. I want to understand it, both functionally and intrinsically. 
-
-## Accomplishments
-05/03/25: Huston, we have lift off! The gameplay is around 80% implemented, with working mine counts, random mine placement, and basic point and click controls. It's not fully interactive, but it's enough to play a full game.
-
-05/02/25: So far...? I've taken lots of pretty screenshots and folded them into a table, all wrapped in a Next.js SPA project :)
-
 
 ## Installation
 This is a standard nuxt project, so setup is pretty straitforward.
@@ -27,6 +15,19 @@ npm run dev
 # or
 npm start
 ```
+
+
+## Goals
+Most of what I'm doing has been inspired by [this online clone of minesweeper](https://minesweeper.online/), and [this paper on using entropy to calculate the likelihood of mine locations, written by Mike Sheppard](https://minesweepergame.com/math/a-simple-minesweeper-algorithm-2023.pdf). 
+
+The ideal final result would be a fully functional minesweeper game with easy, intermediate, hard, and an auto solver that shows probabilities as it makes it's automated click decisions. The math outlined in the paper absolutely melts my mind. I never took statistics in high-school, so this type of work (while enticing) always comes with a steep learning curve. That said, I hope mostly to understand the math well enough to give an *elevator pitch* on how it works, and understand the algorithm well enough to implement it.
+
+This is a **no AI allowed project**. I'm actively learning and regularly advocate for the use of AI as a developer, but with projects like these, it's fun to prompt Grok and ChatGPT **only** for written explainations, **without** providing code. I don't just want to lanch a minesweeper app. I want to understand it, both functionally and intrinsically. 
+
+## Accomplishments
+05/03/25: Huston, we have lift off! The gameplay is around 80% implemented, with working mine counts, random mine placement, and basic point and click controls. It's not fully interactive, but it's enough to play a full game.
+
+05/02/25: So far...? I've taken lots of pretty screenshots and folded them into a table, all wrapped in a Next.js SPA project :)
 
 
 ## Updates
