@@ -37,6 +37,15 @@ export default function Home() {
     revealNearby(i, j)
   }
 
+  function onTileFlag(e: MouseEvent) {
+    e.preventDefault()
+    // @ts-ignore
+    const { tileI: i, tileJ: j, isBomb, nearby } = e.target
+    const td = tiles[COLUMNS * i + j]
+    if (!td) throw new Error('Tile not found')
+    td.className = 'tile flag'
+  }
+
   function countNearby(tile_i: number, tile_j: number) {
     let nearby_count = 0
     for (let i = Math.max(0, tile_i - 1); i <= Math.min(ROWS - 1, tile_i + 1); i++) {
@@ -93,6 +102,7 @@ export default function Home() {
         td.className = `tile unknown`
         td.onclick = onTileClick
         td.ondragenter = onTileClick
+        td.oncontextmenu = onTileFlag
         // @ts-ignore
         td.tileI = i
         // @ts-ignore
