@@ -4,9 +4,12 @@ import Image from "next/image";
 import { useEffect } from "react";
 
 let force_update = 0
+const SAD_FACE = 'sad'
+const HAPPY_FACE = 'happy'
+const COOL_FACE = 'cool'
 const ROWS = 10
 const COLUMNS = 10
-const MINE_COUNT = 20
+const MINE_COUNT = 10
 const MINES = [
   'blank',
   '1',
@@ -26,24 +29,47 @@ const MINES = [
 export default function Home() {
   let indicies: any[] = []
   let tiles: any[] = []
-  
+  let failed: boolean = false
+
+  function updateFace(new_face: string) {
+    const face = document.querySelector('div.face')
+    if (!face) throw new Error("Face Button Not Found")
+    face.className = `face ${new_face}`
+  }
+
+  function onBombClick() {
+    failed = true
+    updateFace(SAD_FACE)
+  }
+
+  function onFaceClick(e: any) {
+    initializeGame()
+    updateFace(HAPPY_FACE)
+  }
+
   function onTileClick(e: MouseEvent) {
+    if (failed) return
     // @ts-ignore
     const { tileI: i, tileJ: j, isBomb, nearby } = e.target
     const td = tiles[COLUMNS * i + j]
     if (!td) throw new Error('Tile not found')
-    const revealed_tile = isBomb ? 'bomb' : MINES[nearby]
+    const already_flagged = td.className.includes('flag')
+    if (already_flagged) return
+    const revealed_tile: string = isBomb ? 'bomb-red' : MINES[nearby]
     td.className = `tile ${revealed_tile}`
+    if (isBomb) return onBombClick()
     revealNearby(i, j)
   }
 
   function onTileFlag(e: MouseEvent) {
     e.preventDefault()
+    if (failed) return
     // @ts-ignore
     const { tileI: i, tileJ: j, isBomb, nearby } = e.target
     const td = tiles[COLUMNS * i + j]
     if (!td) throw new Error('Tile not found')
-    td.className = 'tile flag'
+    const already_flagged = td.className.includes('flag')
+    td.className = already_flagged ? 'tile unknown' : 'tile flag'
   }
 
   function countNearby(tile_i: number, tile_j: number) {
@@ -57,22 +83,22 @@ export default function Home() {
     return Math.floor(nearby_count)
   }
 
-  function revealNearby(tile_i: number, tile_j: number, first=true) {
+  function revealNearby(tile_i: number, tile_j: number, first = true) {
     console.log(`revealNearby(${tile_i}, ${tile_j})`)
     // recursively find and reveal adjacent blank cells and their neighbors
     // 0. Get tile
     const tile = tiles[COLUMNS * tile_i + tile_j]
     const { isBomb, nearby, className } = tile
-    
+
     // 1. Quit if outside bounds, if already revealed (not unknown), or if it's a mine
     const out_of_bounds = tile_i < 0 || tile_i > ROWS || tile_j < 0 || tile_j > COLUMNS
     const is_revealed = first ? false : !(className as string).includes('unknown')
     if (isBomb || out_of_bounds || is_revealed) return
-    
+
     // 2. Reveal that muthafucka
     const new_mineeeee = `tile ${MINES[nearby]}`
     tile.className = new_mineeeee
-    
+
     // 3. Quit if not blank (nearby > 0)
     if (nearby > 0) return
 
@@ -91,12 +117,12 @@ export default function Home() {
     new_grid.className = 'minesweeper-grid'
     grid.replaceWith(new_grid)
     grid = document.querySelectorAll('.minesweeper-grid')[0]
-    
+
     // Loop through the rows and columns to add each tile
     for (let i = 0; i < ROWS; i++) {
       const row = document.createElement('tr')
       for (let j = 0; j < COLUMNS; j++) {
-        indicies.push([i,j])
+        indicies.push([i, j])
         // Setup each tile's class, onclick, and (i,j) attributes
         const td = document.createElement('td')
         td.className = `tile unknown`
@@ -118,7 +144,7 @@ export default function Home() {
   }
 
   function initializeBombs() {
-    const bombs = indicies.sort((a, b) => 0.5 - Math.random()).slice(0,MINE_COUNT)
+    const bombs = indicies.sort((a, b) => 0.5 - Math.random()).slice(0, MINE_COUNT)
     for (const [i, j] of bombs) {
       // @ts-ignore
       tiles[COLUMNS * i + j].isBomb = true
@@ -136,6 +162,10 @@ export default function Home() {
   }
 
   function initializeGame() {
+    indicies = []
+    tiles = []
+    failed = false
+
     initializeGrid()
     initializeBombs()
     initializeNearbyCounts()
@@ -149,11 +179,16 @@ export default function Home() {
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <div className="grid-wrapper">
-          <table className="table-fixed">
-            <tbody className="minesweeper-grid">
-            </tbody>
-          </table>
+        <div className="minesweeper-board flex flex-col gap-[40px]">
+          <div className="w-full flex flex-row justify-center">
+            <div onClick={(e) => onFaceClick(e)} className="face happy"></div>
+          </div>
+          <div className="grid-wrapper">
+            <table className="table-fixed">
+              <tbody className="minesweeper-grid">
+              </tbody>
+            </table>
+          </div>
         </div>
       </main>
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
