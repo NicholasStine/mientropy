@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect } from "react";
+import Counter from "./components/counter";
 
 let force_update = 0
 const SAD_FACE = 'sad'
@@ -180,8 +181,10 @@ export default function Home() {
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         <div className="minesweeper-board flex flex-col gap-[40px]">
-          <div className="w-full flex flex-row justify-center">
+          <div className="w-full flex flex-row justify-between">
+            <Counter count={123}/>
             <div onClick={(e) => onFaceClick(e)} className="face happy"></div>
+            <Counter count={987}/>
           </div>
           <div className="grid-wrapper">
             <table className="table-fixed">
