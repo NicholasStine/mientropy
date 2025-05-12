@@ -13,15 +13,16 @@ export default function Counter({ count }: { count?: number }) {
     }
 
     function setCount(updated_count: number) {
+        console.log("set count")
         const split = updated_count.toString().split('').reverse()
         const [o, t, h] = split
         setHundreds(h || 'off')
         setTens(t || 'off')
-        setOnes(o || 'off')
+        setOnes(o || '0')
     }
 
     useEffect(() => {
-        if (!count) return turnOff()
+        if (!count && count !== 0) return turnOff()
         setCount(count)
     }, [count])
 
