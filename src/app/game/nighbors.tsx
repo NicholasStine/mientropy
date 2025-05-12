@@ -7,7 +7,7 @@ import { SAD_FACE, HAPPY_FACE, COOL_FACE, ROWS, COLUMNS, MINE_COUNT, MINES } fro
 let tiles: any[] = []
 
 // recursively find and reveal adjacent blank cells and their neighbors
-export function revealNearby(tile_i: number, tile_j: number, first = true, _tiles = []) {
+export function revealNearby(tile_i: number, tile_j: number, addRevealed: Function, first = true, _tiles = []) {
   // -1. cache the latest tiles
   if (first) tiles = _tiles
   // 0. Get tile
@@ -21,7 +21,11 @@ export function revealNearby(tile_i: number, tile_j: number, first = true, _tile
 
   // 2. Reveal that muthafucka
   const new_mineeeee = `tile ${MINES[nearby]}`
+  console.log(className as string)
+  console.log((className as string).includes('unknown'))
+  if ((className as string).includes('unknown')) addRevealed()
   tile.className = new_mineeeee
+  console.log("NEEEEAAARRRRR?!?!?!?!?!!!!")
 
   // 3. Quit if not blank (nearby > 0)
   if (nearby > 0) return
@@ -29,7 +33,7 @@ export function revealNearby(tile_i: number, tile_j: number, first = true, _tile
   // 4. For all neighbors, call recurse
   for (let neighbor_i = Math.max(0, tile_i - 1); neighbor_i <= Math.min(ROWS - 1, tile_i + 1); neighbor_i++) {
     for (let neighbor_j = Math.max(0, tile_j - 1); neighbor_j <= Math.min(COLUMNS - 1, tile_j + 1); neighbor_j++) {
-      revealNearby(neighbor_i, neighbor_j, false)
+      revealNearby(neighbor_i, neighbor_j, addRevealed, false)
     }
   }
 

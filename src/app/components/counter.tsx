@@ -13,7 +13,6 @@ export default function Counter({ count }: { count?: number }) {
     }
 
     function setCount(updated_count: number) {
-        console.log("set count")
         const split = updated_count.toString().split('').reverse()
         const [o, t, h] = split
         setHundreds(h || 'off')

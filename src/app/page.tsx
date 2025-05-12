@@ -5,45 +5,49 @@ import { useEffect, useState } from "react";
 import Counter from "./components/counter";
 import { SAD_FACE, HAPPY_FACE, COOL_FACE, ROWS, COLUMNS, MINE_COUNT, MINES } from "./game/constants"
 import { initializeGame } from "./game/initializers";
-import { onFaceClick } from "./game/clackers";
+import { onFaceClick, updateFace } from "./game/clackers";
 // let force_update = 0
 
 export default function Home() {
-  let indicies: any[] = []
-  let tiles: any[] = []
-  let failed: boolean = false
+  let finished: boolean = false
   let flagged: number = 0
-  
-  
+  let revealed: number = 0
+
   const [flaggedState, setFlaggedState] = useState(0)
   function updateFlagState(change: number) {
     flagged = Math.min(flagged + change, MINE_COUNT)
-    console.log("dry firewood", flagged)
     setFlaggedState(flagged)
   }
 
   const [failedState, setFailedState] = useState(false)
   function updateFailedState() {
-    failed = true
+    finished = true
+  }
+
+  function updateRevealedState() {
+    revealed += 1
+    const possible = COLUMNS * ROWS - MINE_COUNT
+    console.log("POSSIBLE: ", possible)
+    console.log("REVEALED: ", revealed)
+    console.log
+    if (revealed >= possible) {
+      finished = true
+      updateFace(COOL_FACE)
+    }
   }
 
   function resetGame() {
     flagged = 0
-    failed = false
+    finished = false
     setFlaggedState(0)
-    setFailedState(false)
-    return () => initializeGame((change: number) => updateFlagState(change), () => failed, updateFailedState)
+    // setFailedState(false)
+    return () => initializeGame((change: number) => updateFlagState(change), () => finished, updateFailedState, updateRevealedState)
   }
 
   // force_update += 1
   useEffect(() => {
-    initializeGame((change: number) => updateFlagState(change), () => failed, updateFailedState)
+    initializeGame((change: number) => updateFlagState(change), () => finished, updateFailedState, updateRevealedState)
   }, [])
-
-  // useEffect(() => {
-  //   console.log("UPDATING FLAG STATE")
-  //   setFlaggedState(flagged)
-  // }, [flagged])
 
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen font-[family-name:var(--font-geist-sans)]">
