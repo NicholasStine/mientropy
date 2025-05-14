@@ -2,7 +2,7 @@
 
 import { onTileClick, onTileFlag, updateFace } from "./clackers"
 import { SAD_FACE, HAPPY_FACE, COOL_FACE, ROWS, COLUMNS, MINE_COUNT, MINES } from "./constants"
-import { countNearby } from "./nighbors"
+import { countNearby } from "./neighbors"
 
 // sets up a new game state
 export function initializeGrid(indicies: any[], tiles: any[], updateFlagged: Function, getFailed: Function, setFailed: Function, addRevealed: Function) {

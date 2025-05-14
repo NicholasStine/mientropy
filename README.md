@@ -22,15 +22,44 @@ Most of what I'm doing has been inspired by [this online clone of minesweeper](h
 
 The ideal final result would be a fully functional minesweeper game with easy, intermediate, hard, and an auto solver that shows probabilities as it makes it's automated click decisions. The math outlined in the paper absolutely melts my mind. I never took statistics in high-school, so this type of work (while enticing) always comes with a steep learning curve. That said, I hope mostly to understand the math well enough to give an *elevator pitch* on how it works, and understand the algorithm well enough to implement it.
 
-This is a **no AI allowed project**. I'm actively learning and regularly advocate for the use of AI as a developer, but with projects like these, it's fun to prompt Grok and ChatGPT **only** for written explainations, **without** providing code. I don't just want to lanch a minesweeper app. I want to understand it, both functionally and intrinsically. 
+This is a **no AI code allowed project**. I'm actively learning and regularly advocate for the use of AI as a developer, but with low priority projects like these, it's fun to prompt Grok and ChatGPT **only** for written explainations, **without** asking for or copy/pasting code. I don't just want to lanch a minesweeper app. I want to understand it, both functionally and intrinsically. 
 
 ## Accomplishments
+05/13/25: The gameplay now has right click to flag, with a functioning counter, and a fully functional face button that updates with the game state. I also modularized the bulk of the code to clean up the page.tsx file.
+
 05/03/25: Huston, we have lift off! The gameplay is around 80% implemented, with working mine counts, random mine placement, and basic point and click controls. It's not fully interactive, but it's enough to play a full game.
 
 05/02/25: So far...? I've taken lots of pretty screenshots and folded them into a table, all wrapped in a Next.js SPA project :)
 
 
 ## Updates
+
+### 05/03/25
+
+First and most importantly, the page.tsx file was getting way out of hand, so I moved all the functions into 4 modules. I also added a 7 segment counter component, a added a right click handler to place and remove flags, and the game face button now updates when the game is failed, won, restarted, etc. The flag counter is fully functional, but the time counter doesn't do anything yet... it's just hard coded with a placeholder value.
+
+![Game Progress as of 05/13/25](/public/game_progress_05_13_25.png)
+
+*Game Progress as of 05/13/25*
+
+**Modularization**
+The code has been split into 4 modules; clackers, constants, initializers, and neighbors. Clackers handles all the left and right mousel clicky clacky events. The constants module stores constants. Easy. The initializers module handles setting up a new game state on page load and restart. Finally, the neighbors module handles counting and revealing nearby tiles.
+
+**7 Segment Display Component:** I added a reusable ```<Counter count={...} />``` component that takes in only one argument for the count (number) to display. Any number 1000 or greater will show the first 3 digits. Negative numbers are not yet supported. 
+
+![7 Segment Individual Images](/public/7_segment/combined.png)
+
+This display works by splitting, sorting, and stringifying the first 3 digits into ones, tens, and hundreds places. Then just plug each digit them into the src attribute to load the image for each place. The digit images were made using the sketch app and some elbow grease, which took 3 iterations to get the setment width and background opacity just right.
+
+![Finished 7 Segment Display](/public/7_segment_987.png) ![Finished 7 Segment Display](/public/7_segment_135.png) ![Finished 7 Segment Display](/public/7_segment_260.png)
+
+**Red Flags:** TIL that there's no "right click" event, instead you have to capture the onContextMenu event, and use e.preventDefault() to overwrite the default right click menu behavior with the flag logic. Placing flags currently doesn't support showing reg flags on game fail, and if you place too many flags, instead of going negative it currently just caps out at 0.
+
+**Game Face:** there are 3 faces; happy, sad, and cool. Cool shows when the game is won, which is when the number of tiles minus the number of bombs is equal to the number of revealed tiles. The sad face shows when the game is lost, when a bomb is clicked. The happy face shows when the game is restarted and remains until the game is won or lost.
+
+![Faces](/public/faces_combined.png)
+
+*Sad, cool, and happy faces*
 
 ### 05/03/25
 And that's the game! Today was a sprint to get the gameplay mechanics working. That included initializing a game grid of any size with any number of mines, randomly distributing mines, calculating the number of nearby mines for each tile, and the point and click controls, with a recursive function to reveal nearby blank cells when you click on a large blank area.

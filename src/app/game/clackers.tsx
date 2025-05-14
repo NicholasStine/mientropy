@@ -1,5 +1,5 @@
 "use client"
-import { revealNearby } from "./nighbors"
+import { revealNearby } from "./neighbors"
 import { SAD_FACE, HAPPY_FACE, COOL_FACE, ROWS, COLUMNS, MINE_COUNT, MINES } from "./constants"
 
 // handles all mouse left and right clicky clackers
@@ -28,7 +28,10 @@ export function onTileFlag(e: MouseEvent, _tiles: any[], getFailed: Function, up
     const { tileI: i, tileJ: j, isBomb, nearby } = e.target
     const td = _tiles[COLUMNS * i + j]
     if (!td) throw new Error('Tile not found')
+    const already_revealed = !td.className.includes('unknown')
     const already_flagged = td.className.includes('flag')
+    if (already_revealed && !already_flagged) return
+    console.log("SHIT")
     td.className = already_flagged ? 'tile unknown' : 'tile flag'
     updateFlagged(already_flagged ? -1 : 1)
 }

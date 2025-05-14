@@ -56,7 +56,7 @@ export default function Home() {
           <div className="w-full flex flex-row justify-between">
             <Counter count={MINE_COUNT - flaggedState} />
             <div onClick={(e) => onFaceClick(e, resetGame())} className="face happy"></div>
-            <Counter count={987} />
+            <Counter count={260} />
           </div>
           <div className="grid-wrapper">
             <table className="table-fixed">
