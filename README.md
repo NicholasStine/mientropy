@@ -34,7 +34,7 @@ This is a **no AI code allowed project**. I'm actively learning and regularly ad
 
 ## Updates
 
-### 05/03/25
+### 05/13/25
 
 First and most importantly, the page.tsx file was getting way out of hand, so I moved all the functions into 4 modules. I also added a 7 segment counter component, a added a right click handler to place and remove flags, and the game face button now updates when the game is failed, won, restarted, etc. The flag counter is fully functional, but the time counter doesn't do anything yet... it's just hard coded with a placeholder value.
 
@@ -51,7 +51,7 @@ The code has been split into 4 modules; clackers, constants, initializers, and n
 
 This display works by splitting, sorting, and stringifying the first 3 digits into ones, tens, and hundreds places. Then just plug each digit them into the src attribute to load the image for each place. The digit images were made using the sketch app and some elbow grease, which took 3 iterations to get the segment width and background opacity just right.
 
-![Finished 7 Segment Display](/public/7_segment_987.png) ![Finished 7 Segment Display](/public/7_segment_135.png) ![Finished 7 Segment Display](/public/7_segment_260.png)
+![Finished 7 Segment Display](/public/7_segment_combined.png)
 
 **Red Flags:** TIL that there's no "right click" event, instead you have to capture the onContextMenu event, and use e.preventDefault() to overwrite the default right click menu behavior with the flag logic. Placing flags currently doesn't support showing reg flags on game fail, and if you place too many flags, instead of going negative it currently just caps out at 0.
 
