@@ -22,7 +22,7 @@ Most of what I'm doing has been inspired by [this online clone of minesweeper](h
 
 The ideal final result would be a fully functional minesweeper game with easy, intermediate, hard, and an auto solver that shows probabilities as it makes it's automated click decisions. The math outlined in the paper absolutely melts my mind. I never took statistics in high-school, so this type of work (while enticing) always comes with a steep learning curve. That said, I hope mostly to understand the math well enough to give an *elevator pitch* on how it works, and understand the algorithm well enough to implement it.
 
-This is a **no AI code allowed project**. I'm actively learning and regularly advocate for the use of AI as a developer, but with low priority projects like these, it's fun to prompt Grok and ChatGPT **only** for written explainations, **without** asking for or copy/pasting code. I don't just want to lanch a minesweeper app. I want to understand it, both functionally and intrinsically. 
+This is a **no AI code allowed project**. I'm actively learning and regularly advocate for the use of AI as a developer, but with low priority projects like these, it's fun to prompt Grok and ChatGPT **only** for written explainations, **without** asking for or copy/pasting code. I don't just want to launch a minesweeper app. I want to understand it, both functionally and intrinsically. 
 
 ## Accomplishments
 05/13/25: The gameplay now has right click to flag, with a functioning counter, and a fully functional face button that updates with the game state. I also modularized the bulk of the code to clean up the page.tsx file.
@@ -43,13 +43,13 @@ First and most importantly, the page.tsx file was getting way out of hand, so I 
 *Game Progress as of 05/13/25*
 
 **Modularization**
-The code has been split into 4 modules; clackers, constants, initializers, and neighbors. Clackers handles all the left and right mousel clicky clacky events. The constants module stores constants. Easy. The initializers module handles setting up a new game state on page load and restart. Finally, the neighbors module handles counting and revealing nearby tiles.
+The code has been split into 4 modules; clackers, constants, initializers, and neighbors. Clackers handles all the left and right mouse clicky clacky events. The constants module stores constants. Easy. The initializers module handles setting up a new game state on page load and restart. Finally, the neighbors module handles counting and revealing nearby tiles.
 
 **7 Segment Display Component:** I added a reusable ```<Counter count={...} />``` component that takes in only one argument for the count (number) to display. Any number 1000 or greater will show the first 3 digits. Negative numbers are not yet supported. 
 
 ![7 Segment Individual Images](/public/7_segment/combined.png)
 
-This display works by splitting, sorting, and stringifying the first 3 digits into ones, tens, and hundreds places. Then just plug each digit them into the src attribute to load the image for each place. The digit images were made using the sketch app and some elbow grease, which took 3 iterations to get the setment width and background opacity just right.
+This display works by splitting, sorting, and stringifying the first 3 digits into ones, tens, and hundreds places. Then just plug each digit them into the src attribute to load the image for each place. The digit images were made using the sketch app and some elbow grease, which took 3 iterations to get the segment width and background opacity just right.
 
 ![Finished 7 Segment Display](/public/7_segment_987.png) ![Finished 7 Segment Display](/public/7_segment_135.png) ![Finished 7 Segment Display](/public/7_segment_260.png)
 
@@ -89,7 +89,7 @@ With both the mine placement and mine count algorithms in place, we finally have
 
 ![Random Dist With Nearby Counts](/public/random-dist-with-nearby-counts.png)
 
-*First successfull game board*
+*First successful game board*
 
 **Point and Click Controls:** So far, the point and click controls are limited to remove the gray tile from the grid square, and reveal the number, mine, or blank square underneath. There's no feedback yet, nor is there support for right click to set flag. One big accomplishment was the implementation of a recursive flood reveal algorithm to reveal more than just one tile per click. The flood reveal algo works as follows:
 
