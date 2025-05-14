@@ -21,11 +21,8 @@ export function revealNearby(tile_i: number, tile_j: number, addRevealed: Functi
 
   // 2. Reveal that muthafucka
   const new_mineeeee = `tile ${MINES[nearby]}`
-  console.log(className as string)
-  console.log((className as string).includes('unknown'))
   if ((className as string).includes('unknown')) addRevealed()
   tile.className = new_mineeeee
-  console.log("NEEEEAAARRRRR?!?!?!?!?!!!!")
 
   // 3. Quit if not blank (nearby > 0)
   if (nearby > 0) return

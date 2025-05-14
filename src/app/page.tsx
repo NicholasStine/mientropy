@@ -22,16 +22,15 @@ export default function Home() {
   const [failedState, setFailedState] = useState(false)
   function updateFailedState() {
     finished = true
+    flagged = MINE_COUNT
   }
 
   function updateRevealedState() {
     revealed += 1
     const possible = COLUMNS * ROWS - MINE_COUNT
-    console.log("POSSIBLE: ", possible)
-    console.log("REVEALED: ", revealed)
-    console.log
     if (revealed >= possible) {
       finished = true
+      setFlaggedState(MINE_COUNT)
       updateFace(COOL_FACE)
     }
   }

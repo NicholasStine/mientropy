@@ -31,7 +31,6 @@ export function onTileFlag(e: MouseEvent, _tiles: any[], getFailed: Function, up
     const already_revealed = !td.className.includes('unknown')
     const already_flagged = td.className.includes('flag')
     if (already_revealed && !already_flagged) return
-    console.log("SHIT")
     td.className = already_flagged ? 'tile unknown' : 'tile flag'
     updateFlagged(already_flagged ? -1 : 1)
 }
