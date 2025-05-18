@@ -1,6 +1,7 @@
 "use client"
 import { revealNearby } from "./neighbors"
 import { SAD_FACE, HAPPY_FACE, COOL_FACE, ROWS, COLUMNS, MINE_COUNT, MINES } from "./constants"
+import { collectProbs } from "./probabilitawh"
 
 // handles all mouse left and right clicky clackers
 
@@ -18,6 +19,8 @@ export function onTileClick(e: MouseEvent, _tiles: any[], updateFace: Function, 
     td.className = `tile ${revealed_tile}`
     if (isBomb) return onBombClick(_failed, updateFace, setFailed)
     revealNearby(i, j, addRevealed, true, _tiles as never[])
+
+    collectProbs(_tiles)
 }
 
 export function onTileFlag(e: MouseEvent, _tiles: any[], getFailed: Function, updateFlagged: Function) {

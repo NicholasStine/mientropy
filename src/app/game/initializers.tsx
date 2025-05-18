@@ -3,6 +3,7 @@
 import { onTileClick, onTileFlag, updateFace } from "./clackers"
 import { SAD_FACE, HAPPY_FACE, COOL_FACE, ROWS, COLUMNS, MINE_COUNT, MINES } from "./constants"
 import { countNearby } from "./neighbors"
+import { collectProbs } from "./probabilitawh"
 
 // sets up a new game state
 export function initializeGrid(indicies: any[], tiles: any[], updateFlagged: Function, getFailed: Function, setFailed: Function, addRevealed: Function) {
@@ -67,4 +68,5 @@ export function initializeGame(updateFlagged: Function, getFailed: Function, set
     const [c_indicies, c_tiles] = initializeNearbyCounts(b_indicies, b_tiles)
     indicies = c_indicies
     tiles = c_tiles
+    collectProbs(tiles)
 }

@@ -1,12 +1,8 @@
 # To Do List
 
-
+- start probability module
 - **BUG** flashing input cursor shows on everything clicked
-- **BUG** one of the tiles in the bottom row looks off
-- basic game borders
 - border textures
-- counter component
-- mine counter
 - time counter
 - reveal mines on game fail
 - reveal bad flags on game fail
@@ -14,6 +10,12 @@
 - transparent mode (show numbers and mines under transparent tiles)
 - flood reveal algorithm needs to be more inclusive. In the real game, when I click on a cluster of numbers (mine counts), it reveals them recursively even though there's no blank squares.
 
+
+**05/13/2025**
+DONE - basic game borders
+DONE - counter component
+DONE - mine counter
+DONE - **BUG** one of the tiles in the bottom row looks off
 
 **05/09/2025**
 DONE - **BUG** right clicking numbers or blank squares sets a flag
