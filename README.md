@@ -25,6 +25,9 @@ The ideal final result would be a fully functional minesweeper game with easy, i
 This is a **no AI code allowed project**. I'm actively learning and regularly advocate for the use of AI as a developer, but with low priority projects like these, it's fun to prompt Grok and ChatGPT **only** for written explainations, **without** asking for or copy/pasting code. I don't just want to launch a minesweeper app. I want to understand it, both functionally and intrinsically. 
 
 ## Accomplishments
+
+07/01/25: Wow, it's already July! I tabled this project for a while in favor of two other projects, I was working on an AI driven Conway's Game of Life, and yet another AI piloted lunar lander. Now that I'm back, I finally broke the no AI written code rule and copied a python example of the minesweeper probability algorithm into javascript, and used it to color dangerous / safe tiles red and green. It works! Much success, very nice!
+
 05/13/25: The gameplay now has right click to flag, with a functioning counter, and a fully functional face button that updates with the game state. I also modularized the bulk of the code to clean up the page.tsx file.
 
 05/03/25: Huston, we have lift off! The gameplay is around 80% implemented, with working mine counts, random mine placement, and basic point and click controls. It's not fully interactive, but it's enough to play a full game.
@@ -33,6 +36,22 @@ This is a **no AI code allowed project**. I'm actively learning and regularly ad
 
 
 ## Updates
+
+### 07/01/25
+
+The final piece of the puzzle is in place! The probability algorithm works by collecting all available constraints (numbers of mines), and uses two inverted arrays of safe (q) and dangerous (p) to converge to a solution that fits the constraints. 
+
+For each constraint, p is calculated by dividing the constraint by the sum of all surrounding probabilities, and multiplying each neighboring probability by the result. The q array is calculated the same way, but inverted, so the number of non-mines divided by the sum of neighboring probs. Both p and q are then normalized by separately dividing each p and q cell by the sum of both cells. 
+
+This whole process is then (supposed to be) repeated until the solution stops changing (converges) but I haven't yet implemented this. I just fixed it at 10 iterations and it still performs well beyond my expectations, and it's really fast!
+
+![First Successful Algorithm Iteration](/public/first-success-slight-improvement.png)
+
+There's still stuff to do! I randomly made the tile yellow just to add some color so the hue-rotate filter would work to color the tiles red and green, which initially didn't work because the tile image was all gray, so there was quite literally no "hue" to "shift". The gray tiles are actually yellow tiles with a grayscale filter applied, which is kind of fun! It's also not that fun because the gray ones are lighter than normal, which must be fixed. I demand it!
+
+I also have the code written to adjust the shades of red and green based on the probabilitawh value, and it works but the color change is disappointing and really hard to see. We'll see what comes of that soon enough. 
+
+The shuffling algorithm could also use some work, more often than not the distribution is clustered at the top of the grid, and not very well distributed. I think I can improve it too, I'm tired so I'll add screenshots of these improvements when I actually.. you know, make the improvements!
 
 ### 05/13/25
 
