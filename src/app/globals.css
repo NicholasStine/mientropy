@@ -103,8 +103,10 @@ td[class="tile flag-red"] {
 }
 
 td[class="tile unknown"] {
-  background: url('/tile-unknown.png');
+  background: url('/tile-unknown-colored.png');
   background-size: contain;
+  /* filter: hue-rotate(250deg) saturate(300%); */
+  /* filter: hue-rotate(50deg) saturate(300%); */
 }
 
 div.face {
